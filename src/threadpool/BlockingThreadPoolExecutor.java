@@ -13,7 +13,7 @@ public class BlockingThreadPoolExecutor {
     private ThreadPoolExecutor pool = null;
 
     public BlockingThreadPoolExecutor() {
-        pool = new ThreadPoolExecutor(1, 3, 30, TimeUnit.MINUTES, new ArrayBlockingQueue<Runnable>(5), new RecordThreadFactory(), new RetryRejectedExecutionHandler());
+        pool = new ThreadPoolExecutor(3, 5, 30, TimeUnit.MINUTES, new ArrayBlockingQueue<Runnable>(5), new RecordThreadFactory(), new RetryRejectedExecutionHandler());
     }
 
     public void destory() {
@@ -55,19 +55,16 @@ public class BlockingThreadPoolExecutor {
         BlockingThreadPoolExecutor exec = new BlockingThreadPoolExecutor();
         ExecutorService pool = exec.getBlockingThreadPoolExecutor();
         long begin = System.currentTimeMillis();
-        for(int i=1; i<100; i++) {
+        for (int i = 1; i < 100; i++) {
             System.out.println("提交第" + i + "个任务!");
-            pool.execute(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                        System.out.println(">>>task is running=====");
-                        TimeUnit.SECONDS.sleep(1);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    } finally {
-                        latch.countDown();
-                    }
+            pool.execute(() -> {
+                try {
+                    System.out.println(">>>task is running=====");
+                    TimeUnit.SECONDS.sleep(1);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } finally {
+                    latch.countDown();
                 }
             });
         }
