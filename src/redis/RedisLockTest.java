@@ -1,4 +1,4 @@
-package SyncUtil;
+package redis;
 
 import java.util.concurrent.CountDownLatch;
 
