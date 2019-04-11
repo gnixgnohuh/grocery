@@ -1,0 +1,5 @@
+gnixgnohuh:
+  cache:
+    namespace: gnixgnohuh
+    defaultExpire: 1440
+    defaultNilValueExpire: 5
