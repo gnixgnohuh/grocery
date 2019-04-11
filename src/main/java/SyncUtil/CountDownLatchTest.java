@@ -24,8 +24,6 @@ public class CountDownLatchTest {
             }).start();
         }
 
-
-
         try {
             latch.await();
         } catch (InterruptedException e) {
@@ -33,12 +31,5 @@ public class CountDownLatchTest {
         }
 
         System.out.println("end");
-
-//        try {
-//            latch.await();
-//            System.out.println("end");
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
     }
 }
